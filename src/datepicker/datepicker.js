@@ -523,6 +523,9 @@ function ($compile, $parse, $document, $position, dateFilter, dateParser, datepi
         }
       }
       ngModel.$parsers.unshift(parseDate);
+      ngModel.$formatters.push(function (value) {
+                return ngModel.$isEmpty(value) ? value : dateFilter(value, dateFormat);
+            });
 
       // Inner change
       scope.dateSelection = function(dt) {
